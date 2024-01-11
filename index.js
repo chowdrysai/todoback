@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Todo = require('./model/postSchema');
 
+const Route=require('./Routes')
 const app = express();
 
 app.use(cors());
@@ -17,30 +18,7 @@ mongoose.connect('mongodb+srv://chowdrysai45:sonu1234@cluster0.02ljlun.mongodb.n
     console.log('Error connecting to MongoDB:', error);
   });
 
-app.post('/todo', async (req, res) => {
-  try {
-    const todoData = req.body;
-    const date = new Date();
-
-    const newTodo = new Todo({
-      ...todoData,
-      date,
-    });
-
-    await newTodo.save();
-
-    res.status(201).json(newTodo);
-
-  } catch (error) {
-    console.error('Error creating todo:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-app.get('/', async (req, res) => {
-  res.send('Hello World');
-});
-
+app.use('/',Route)
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

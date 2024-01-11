@@ -13,7 +13,7 @@ const addTodo=async (req, res) => {
       console.error('Error creating todo:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  };
+};
 
  const getAllTodo=  async (req, res) => {
     try {
@@ -23,7 +23,8 @@ const addTodo=async (req, res) => {
       console.error('Error getting todos:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  };
+};
+
 const deleteTodo=  async (req, res) => {
     try {
       const { id } = req.params;
@@ -34,6 +35,7 @@ const deleteTodo=  async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
 const updateTodo=  async (req, res) => {
     try {
       const { id } = req.params;
@@ -44,6 +46,7 @@ const updateTodo=  async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
 module.exports={
     addTodo,
     getAllTodo,
