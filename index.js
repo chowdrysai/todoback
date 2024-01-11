@@ -1,7 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const app = express()
+const cors=require('cors')
 
+
+const app = express()
+app.use(cors());
 mongoose.connect('mongodb+srv://chowdrysai45:sonu1234@cluster0.02ljlun.mongodb.net/todo', {
 })
     .then(() => {
