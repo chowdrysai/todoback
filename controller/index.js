@@ -1,11 +1,10 @@
 const Todo=require('../model/postSchema')
 const addTodo=async (req, res) => {
     try {
+      console.log(req.body);
       const todoData = req.body;
-      const date = new Date();
       const newTodo = new Todo({
         ...todoData,
-        date,
       });
       await newTodo.save();
       res.status(201).json(newTodo);
@@ -46,11 +45,22 @@ const updateTodo=  async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
+const updateStatus=  async (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(req.body,id)
+      const todo = await Todo.findByIdAndUpdate(id, req.body, { new: true });
+      res.status(200).json(todo);
+    } catch (error) {
+      console.error('Error updating todo:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 module.exports={
     addTodo,
     getAllTodo,
     deleteTodo,
     updateTodo,
+    updateStatus
 }
   
